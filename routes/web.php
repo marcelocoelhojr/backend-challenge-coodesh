@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\CandidateController;
-use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layout');
+    return view('welcome');
 });
-
-Route::get('/jobs', [JobController::class, 'listView']);
-Route::get('/candidates', [CandidateController::class, 'listView']);
 
