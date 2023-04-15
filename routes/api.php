@@ -14,11 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('job')->group(function () {
-    Route::post('/create', [JobController::class, 'create']);
-    Route::get('/list', [JobController::class, 'list']);
-    Route::get('/{id}', [JobController::class, 'getJob']);
-    Route::put('/update/{id}', [JobController::class, 'update']);
-    Route::delete('/{id}', [JobController::class, 'delete']);
-    Route::post('/cache', [JobController::class, 'filterCache']);
+Route::get('/teste', [JobController::class, 'readFirst100LinesFromFile']);
+Route::get('/', [JobController::class, 'create']);
+Route::prefix('products')->group(function () {
+    Route::put('/{code}', [JobController::class, 'create']);
+    Route::delete('/{code}', [JobController::class, 'create']);
+    Route::get('/{code}', [JobController::class, 'create']);
+    Route::get('/', [JobController::class, 'create']);
 });
+
+// - `GET /`: Detalhes da API, se conexão leitura e escritura com a base de dados está OK, horário da última vez que o CRON foi executado, tempo online e uso de memória.
+//  - `PUT /products/:code`: Será responsável por receber atualizações do Projeto Web
+//  - `DELETE /products/:code`: Mudar o status do produto para `trash`
+//  - `GET /products/:code`: Obter a informação somente de um produto da base de dados
+//  - `GET /products`: Listar todos os produtos da base de dados, adicionar sistema de paginação para não sobrecarregar o `REQUEST`.
