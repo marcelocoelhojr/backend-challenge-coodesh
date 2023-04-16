@@ -22,7 +22,7 @@ class OpenFoodService extends OpenFoodApi implements ProductServiceContract
     /**
      * @inheritdoc
      */
-    public function dispachJobs(): void
+    public function dispatchJobs(): void
     {
         $productsNames = $this->getProducts();
         dump($productsNames);

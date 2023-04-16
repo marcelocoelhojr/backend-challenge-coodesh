@@ -15,7 +15,7 @@ class OpenFoodApi extends ApiConnection
     }
 
     /**
-     * Get files products list
+     * Get product file names
      *
      * @return Collection
      */

@@ -6,14 +6,14 @@ use Illuminate\Support\Collection;
 interface ProductServiceContract
 {
     /**
-     * Dispach jobs to get products
+     * Dispatch jobs to get products
      *
      * @return void
      */
-    public function dispachJobs(): void;
+    public function dispatchJobs(): void;
 
     /**
-     * Get files products list
+     * Get product file names
      *
      * @return Collection
      */
