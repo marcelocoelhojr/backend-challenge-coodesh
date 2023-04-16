@@ -4,15 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 
-class AddressException extends Exception
+class ProductException extends Exception
 {
-    /**
-     * The status code to use for the response.
-     *
-     * @var int
-     */
-    public int $status = 400;
-
     /**
      * Create a new exception instance.
      *
@@ -23,5 +16,4 @@ class AddressException extends Exception
     {
         $this->message = $message;
     }
-
 }

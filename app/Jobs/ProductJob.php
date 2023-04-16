@@ -39,7 +39,7 @@ class ProductJob implements ShouldQueue
     public function handle(): void
     {
         $providerClass =  self::PRODUCT_CLASS_NAMESPACE . $this->provider . "\\" . $this->provider . "Service";
-        $providerService = new $providerClass();
-        $providerService->getProductsFiles($this->fileName);
+        $providerService = new $providerClass($this->fileName);
+        $providerService->getProductFile();
     }
 }

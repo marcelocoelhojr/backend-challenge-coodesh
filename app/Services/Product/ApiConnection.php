@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Product\OpenFood;
+namespace App\Services\Product;
 
 use GuzzleHttp\Client;
 
@@ -11,7 +11,6 @@ class ApiConnection
 
     public function __construct()
     {
-        $this->endpoint = config('products.OpenFoodFacts.endpoint');
         $this->connection = new Client();
     }
 

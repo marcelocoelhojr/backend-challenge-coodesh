@@ -20,10 +20,9 @@ interface ProductServiceContract
     public function getProducts(): Collection;
 
     /**
-     * Get products files from api
+     * Get product file from provider api
      *
-     * @param string $fileName
      * @return void
      */
-    public function getProductsFiles(string $fileName) : void;
+    public function getProductFile() : void;
 }

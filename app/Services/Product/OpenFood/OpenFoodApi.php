@@ -2,13 +2,17 @@
 
 namespace App\Services\Product\OpenFood;
 
-use GuzzleHttp\Client;
+use App\Services\Product\ApiConnection;
 use Illuminate\Support\Collection;
+use GuzzleHttp\Client;
 
 class OpenFoodApi extends ApiConnection
 {
-    protected Client $connection;
-    protected string $endpoint;
+    public function __construct()
+    {
+        $this->endpoint = config('products.OpenFoodFacts.endpoint');
+        parent::__construct();
+    }
 
     /**
      * Get files products list
@@ -24,6 +28,25 @@ class OpenFoodApi extends ApiConnection
     }
 
     /**
+     * Download the compressed file and save it to disk
+     *
+     * @param string $fileName
+     * @return void
+     */
+    protected function getFile(string $fileName): void
+    {
+        $url = $this->endpoint . $fileName;
+        $fp = fopen('/tmp/' . $fileName, 'w');
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FILE, $fp);
+        curl_setopt($ch, CURLOPT_ENCODING, "gzip");
+        curl_exec($ch);
+        curl_close($ch);
+        fclose($fp);
+    }
+
+    /**
      * Turn product string into array
      *
      * @param string $response
@@ -31,6 +54,13 @@ class OpenFoodApi extends ApiConnection
      */
     private function explodeProducts(string $response): array
     {
-       return explode(PHP_EOL, $response);
+        $productNames = explode(PHP_EOL, $response);
+
+        $removeKey = array_search('', $productNames);
+        if ($removeKey) {
+            unset($productNames[$removeKey]);
+        }
+
+        return $productNames;
     }
 }
