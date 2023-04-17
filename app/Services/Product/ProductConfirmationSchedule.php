@@ -9,7 +9,7 @@ class ProductConfirmationSchedule
     const PRODUCT_CLASS_NAMESPACE = 'App\\Services\\Product\\';
 
     /**
-     * Schedule runner confirmation
+     * Schedule runner validation
      *
      * @param string|null $partner
      * @return void
@@ -25,7 +25,7 @@ class ProductConfirmationSchedule
     }
 
     /**
-     * Confirm sells on partner
+     * Validate products on provider
      *
      * @param string $partner
      * @return void
