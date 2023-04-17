@@ -25,9 +25,8 @@ class OpenFoodService extends OpenFoodApi implements ProductServiceContract
     public function dispatchJobs(): void
     {
         $productsNames = $this->getProducts();
-        dump($productsNames);
         $productsNames->each(function ($productName) {
-            ProductJob::dispatchSync($this->provider, $productName); //! tirar do sync
+            ProductJob::dispatch($this->provider, $productName);
         });
     }
 
@@ -41,9 +40,9 @@ class OpenFoodService extends OpenFoodApi implements ProductServiceContract
             $filesService = new FilesService($this->fileName);
             $filesService->decompressProductFile($this->fileName);
             $products = $filesService->readProductFile();
-            $products->each(function ($product) {
-                dump(json_decode($product));
-                // TODO: implementar função para interar os dados no banco.
+            $validateService = new OpenFoodValidation($this->fileName);
+            $products->each(function ($product) use ($validateService) {
+                $validateService->validate(json_decode($product));
             });
         } catch (Exception $e) {
             throw new ProductException($e->getMessage());

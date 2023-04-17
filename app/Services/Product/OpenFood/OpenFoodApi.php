@@ -4,7 +4,6 @@ namespace App\Services\Product\OpenFood;
 
 use App\Services\Product\ApiConnection;
 use Illuminate\Support\Collection;
-use GuzzleHttp\Client;
 
 class OpenFoodApi extends ApiConnection
 {

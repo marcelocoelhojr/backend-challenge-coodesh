@@ -10,7 +10,7 @@ class FilesService
     private ?string $fileName;
 
     const FILE_DIR = '/tmp/';
-    const PRODUCTS_LINE = 1;
+    const PRODUCTS_LINE = 100;
 
     public function __construct(?string $fileName = null)
     {
