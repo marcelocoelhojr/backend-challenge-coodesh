@@ -2,7 +2,7 @@
 
 namespace App\Console;
 
-use App\Services\TestConfirmationSchedule;
+use App\Services\Product\ProductConfirmationSchedule;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,8 +13,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->call(new TestConfirmationSchedule, ['partner' => 'test'])
-            ->name('c_awin')
+        $schedule->call(new ProductConfirmationSchedule, ['provider' => 'openFood'])
+            ->name('v_open_food')
             ->everyMinute()
             ->onOneServer();
     }
