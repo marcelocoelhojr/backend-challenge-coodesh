@@ -26,7 +26,6 @@ abstract class ProductValidation
         $this->product = $product;
         $code = $this->findProduct();
         if ($code != null) {
-            // TODO: implementar função para atualizar
             return;
         }
         $model = $this->setProductApiData($product);
