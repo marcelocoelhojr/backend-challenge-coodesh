@@ -6,6 +6,9 @@ use App\Http\Resources\CronLogResource;
 use App\Models\Product;
 use App\Services\CronLog\CronLogService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\PaginatedResourceResponse;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class ProductService
 {
@@ -34,10 +37,20 @@ class ProductService
      * Delete product by external code
      *
      * @param int $code
-     *
+     * @return integer
      */
-    public function deleteProduct(int $code)
+    public function deleteProduct(int $code): int
     {
         return Product::where('external_id', $code)->delete();
+    }
+
+    /**
+     * Get product list
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getProductList(): LengthAwarePaginator
+    {
+        return Product::paginate();
     }
 }

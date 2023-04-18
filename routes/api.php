@@ -21,8 +21,7 @@ Route::prefix('products')->group(function () {
     Route::put('/{code}', [ProductController::class, 'update']);
     Route::delete('/{code}', [ProductController::class, 'delete']);
     Route::get('/{code}', [ProductController::class, 'getProduct']);
-    Route::get('/', [ProductController::class, 'create']);
+    Route::get('/', [ProductController::class, 'getProductsList']);
 });
 
 //  - `PUT /products/:code`: Será responsável por receber atualizações do Projeto Web
-//  - `GET /products`: Listar todos os produtos da base de dados, adicionar sistema de paginação para não sobrecarregar o `REQUEST`.

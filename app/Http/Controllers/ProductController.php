@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Product\CronLogResource;
+use App\Http\Resources\Product\ProductListCollection;
 use App\Http\Resources\Product\ProductResource;
 use App\Services\CronLog\CronLogService;
 use App\Services\Product\ProductService;
@@ -46,6 +47,22 @@ class ProductController extends Controller
         }
 
         return apiResponse(['code' => $code], 'produto deletado com sucesso');
+    }
+
+    /**
+     * Get product list
+     *
+     * @return Response|JsonResponse
+     */
+    public function getProductsList(): Response|JsonResponse
+    {
+        $productService = new ProductService();
+        $products = $productService->getProductList();
+        if ($products == null) {
+            return response()->noContent();
+        }
+
+        return apiResponse(new ProductListCollection($products), 'lista de produtos');
     }
 
     /**
