@@ -34,6 +34,6 @@ trait CronLog
      */
     private function getDatabaseConnectionStatus(): string
     {
-        return DB::connection()->getPdo() ? 'SUCESS' : 'FAILURE';
+        return DB::connection()->getPdo() ? 'SUCCESS' : 'FAILURE';
     }
 }

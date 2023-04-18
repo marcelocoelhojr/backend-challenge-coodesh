@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('time')->comment('seconds ');
             $table->bigInteger('memory')->comment('bytes');
             $table->timestamp('executed_at');
-            $table->enum('status_connection_database', ['SUCESS', 'FAILURE']);
+            $table->enum('status_connection_database', ['SUCCESS', 'FAILURE']);
         });
     }
 

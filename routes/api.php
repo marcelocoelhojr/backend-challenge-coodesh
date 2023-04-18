@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CronLogController;
 use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/teste', [JobController::class, 'readFirst100LinesFromFile']);
-Route::get('/', [JobController::class, 'create']);
+Route::get('/', [CronLogController::class, 'getApidetails']);
 Route::prefix('products')->group(function () {
     Route::put('/{code}', [JobController::class, 'create']);
     Route::delete('/{code}', [JobController::class, 'create']);
