@@ -3,17 +3,11 @@
 namespace Tests\Feature\Product;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use Tests\ProductTestCase;
 
-class GetProductListTest extends TestCase
+class GetProductListTest extends ProductTestCase
 {
     use RefreshDatabase;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->seed('Database\\Seeders\\ProductSeeder');
-    }
 
     /**
      * Get product list

@@ -3,17 +3,11 @@
 namespace Tests\Feature\Product;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use Tests\ProductTestCase;
 
-class DeleteProductTest extends TestCase
+class DeleteProductTest extends ProductTestCase
 {
     use RefreshDatabase;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->seed('Database\\Seeders\\ProductSeeder');
-    }
 
     /**
      * Delete product successfully
