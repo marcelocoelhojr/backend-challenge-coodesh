@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CronLogResource;
-use App\Http\Resources\ProductResource;
+use App\Http\Resources\Product\CronLogResource;
+use App\Http\Resources\Product\ProductResource;
 use App\Services\CronLog\CronLogService;
 use App\Services\Product\ProductService;
 use Illuminate\Http\JsonResponse;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
 
-     /**
+    /**
      * Get product by external code
      *
      * @param int $code
@@ -31,12 +31,29 @@ class ProductController extends Controller
         return apiResponse(new ProductResource($product), 'dados do produto');
     }
 
+     /**
+     * Delete product by external code
+     *
+     * @param int $code
+     * @return Response|JsonResponse
+     */
+    public function delete(int $code): Response|JsonResponse
+    {
+        $productService = new ProductService();
+        $productStatus = $productService->deleteProduct($code);
+        if ($productStatus == 0) {
+            return response()->noContent();
+        }
+
+        return apiResponse(['code' => $code], 'produto deletado com sucesso');
+    }
+
     /**
      *
      *
      * @return JsonResponse
      */
-    public function updateProduct(int $id, Request $request): JsonResponse
+    public function update(int $id, Request $request): JsonResponse
     {
         $validator = Validator::make(
             $request,

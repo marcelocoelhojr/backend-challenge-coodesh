@@ -29,4 +29,15 @@ class ProductService
     {
         return Product::where('external_id', $code)->first();
     }
+
+    /**
+     * Delete product by external code
+     *
+     * @param int $code
+     *
+     */
+    public function deleteProduct(int $code)
+    {
+        return Product::where('external_id', $code)->delete();
+    }
 }
