@@ -19,7 +19,6 @@ class ProductConfirmationSchedule
         if ($provider == null) {
             return;
         }
-        
         $this->validationProcess(ucfirst($provider));
     }
 

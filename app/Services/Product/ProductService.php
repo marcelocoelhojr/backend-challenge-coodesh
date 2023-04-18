@@ -56,7 +56,7 @@ class ProductService
         $product->product_name = $params['product_name'] ?? null;
         $product->payload = json_encode($params);
         $product->save();
-        
+
         return $product;
     }
 }
