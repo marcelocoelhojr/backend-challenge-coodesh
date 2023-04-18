@@ -2,26 +2,11 @@
 
 namespace  App\Services\Product;
 
-use App\Http\Resources\CronLogResource;
 use App\Models\Product;
-use App\Services\CronLog\CronLogService;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\PaginatedResourceResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 
 class ProductService
 {
-    /**
-     * Get cron API details
-     *
-     * @return JsonResponse
-     */
-    // public function updateProduct(int $id): JsonResponse
-    // {
-
-    // }
-
     /**
      * Get product by external code
      *
@@ -52,5 +37,26 @@ class ProductService
     public function getProductList(): LengthAwarePaginator
     {
         return Product::paginate();
+    }
+
+    /**
+     * Update product by code
+     *
+     * @param integer $code
+     * @param array $params
+     * @return Product
+     */
+    public function updateProduct(int $code, array $params): Product
+    {
+        $product = Product::where('external_id', $code)->firstOrFail();
+        $product->external_id =  $code;
+        $product->status =  $params['status'];
+        $product->imported_t =  gmdate("Y-m-d H:i:s", $params['imported_t']);
+        $product->url =  $params['url'];
+        $product->product_name = $params['product_name'] ?? null;
+        $product->payload = json_encode($params);
+        $product->save();
+        
+        return $product;
     }
 }

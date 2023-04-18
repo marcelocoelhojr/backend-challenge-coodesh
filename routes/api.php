@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\CronLogController;
-use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +22,3 @@ Route::prefix('products')->group(function () {
     Route::get('/{code}', [ProductController::class, 'getProduct']);
     Route::get('/', [ProductController::class, 'getProductsList']);
 });
-
-//  - `PUT /products/:code`: Será responsável por receber atualizações do Projeto Web

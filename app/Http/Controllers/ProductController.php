@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ProductBadRequest;
+use App\Http\Requests\ProductRequest;
 use App\Http\Resources\Product\CronLogResource;
 use App\Http\Resources\Product\ProductListCollection;
 use App\Http\Resources\Product\ProductResource;
+use App\Models\Product;
 use App\Services\CronLog\CronLogService;
 use App\Services\Product\ProductService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
 {
@@ -32,7 +36,7 @@ class ProductController extends Controller
         return apiResponse(new ProductResource($product), 'dados do produto');
     }
 
-     /**
+    /**
      * Delete product by external code
      *
      * @param int $code
@@ -65,33 +69,22 @@ class ProductController extends Controller
         return apiResponse(new ProductListCollection($products), 'lista de produtos');
     }
 
-    /**
+  /**
+     * Update product by code
      *
-     *
+     * @param integer $code
+     * @param array $params
      * @return JsonResponse
      */
-    public function update(int $id, Request $request): JsonResponse
+    public function update(int $code, Request $request): JsonResponse
     {
-        $validator = Validator::make(
-            $request,
-            [
-                'external_id' => 'R',
-                'product_name' => '',
-                'status' => '',
-                'imported_t' => '',
-                'url' => '',
-                'product_file' => '',
-                'payload' => '',
-            ]
-        );
-        dd($validator);
-        if ($validator->fails()) {
-            // throw new ValidationException($validator);
+        $validator = validate(Product::getValidation(), $request->all());
+        if (method_exists($validator, 'getStatusCode')) {
+            return $validator;
         }
+        $productService = new ProductService();
+        $product = $productService->updateProduct($code, $validator->validated());
 
-        $cronService = new ProductService();
-        // $log = $cronService->updateProduct($id);
-
-        return apiResponse(new CronLogResource($log), 'detalhes da api');
+        return apiResponse(new ProductResource($product), 'produto atualizado com sucesso');
     }
 }
