@@ -2,23 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\ProductBadRequest;
-use App\Http\Requests\ProductRequest;
-use App\Http\Resources\Product\CronLogResource;
 use App\Http\Resources\Product\ProductListCollection;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Product;
-use App\Services\CronLog\CronLogService;
 use App\Services\Product\ProductService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
 {
-
     /**
      * Get product by external code
      *
@@ -69,7 +62,7 @@ class ProductController extends Controller
         return apiResponse(new ProductListCollection($products), 'lista de produtos');
     }
 
-  /**
+    /**
      * Update product by code
      *
      * @param integer $code
