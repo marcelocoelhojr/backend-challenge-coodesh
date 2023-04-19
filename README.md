@@ -22,7 +22,7 @@ A implementação de testes unitários é uma prática importante no desenvolvim
 Para simular um ambiente realista e testar a aplicação de forma mais eficiente, foi utilizado o recurso de seeder do Laravel juntamente com a factory, que permite preencher o banco de dados com dados fictícios de forma automatizada. Essas ferramentas foram utilizadas exclusivamente nos testes do projeto."
 
 # Implementação da integração com a API Open Food Facts
-A API em questão lida com arquivos compactados no formato gz e requer que o processo de download e leitura dos dados seja otimizado para garantir a eficiência do sistema. Para isso, o sitema utiliza um sistema de cron schedule que permite que o processo seja executado de forma assíncrona em intervalos regulares.
+A API em questão lida com arquivos compactados no formato gz e requer que o processo de download e leitura dos dados seja otimizado para garantir a eficiência do sistema. Para isso, o projeto utiliza um sistema de cron schedule que permite que o processo seja executado de forma assíncrona em intervalos regulares.
 
 Em primeiro lugar, é necessário obter uma lista com os nomes dos arquivos disponíveis para download. Em seguida, o sistema de cron schedule inicia o processo de download dos arquivos individualmente. Uma vez baixado, o arquivo compactado é salvo no disco e, em seguida, descompactado em um processo separado, permitindo que a CPU seja liberada para outras tarefas enquanto a descompactação é realizada em segundo plano.
 
@@ -53,8 +53,8 @@ composer install
 ```bash
 ./vendor/bin/sail up
 ```
-### Sistem de filas
-No projeto, foi implementado o sistema de filas do Laravel, que permite executar tarefas assíncronas em segundo plano. Isso é especialmente útil para processar tarefas que requerem muito tempo e recursos, como é o caso da manipulão de arquvios deste projeto.
+### Sistema de filas
+No projeto, foi implementado o sistema de filas do Laravel, que permite executar tarefas assíncronas em segundo plano. Isso é especialmente útil para processar tarefas que requerem muito tempo e recursos, como é o caso da manipulação de arquvios deste projeto.
 
 Execute o seguinte comando para iniciar o sistema de filas:
 ```bash
