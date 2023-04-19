@@ -9,6 +9,7 @@ Em resumo, neste projeto foi feito um trabalho completo de desenvolvimento de um
 Além disso, foi implementado um sistema de agendamento de tarefas com o uso de Cron Schedule para garantir a execução de tarefas de forma assíncrona e automática, sem a necessidade de intervenção manual.
 
 E para assegurar a qualidade e integridade do código, foram implementados testes unitários em todas as etapas do processo de desenvolvimento. Isso garantiu que a aplicação estivesse funcionando corretamente em todas as situações e possibilitou uma maior confiança na entrega do produto final.
+[Apresentação do projeto](https://www.loom.com/embed/9c1f015f12224c5a884e5df7896486fc)
 
 >  This is a challenge by [Coodesh](https://coodesh.com/)
 
