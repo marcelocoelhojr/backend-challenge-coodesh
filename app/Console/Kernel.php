@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(new ProductConfirmationSchedule, ['provider' => 'openFood'])
             ->name('v_open_food')
-            ->everyMinute()
+            ->dailyAt('03:00')
             ->onOneServer();
     }
 
