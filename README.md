@@ -51,7 +51,7 @@ composer install
 ```
 6. Na raiz do projeto, execute o seguinte comando para iniciar o projeto:
 ```bash
-./vendor/bin/sail up
+./vendor/bin/sail up -d
 ```
 7. Na raiz do projeto, execute o seguinte comando para criar a base de dados:
 ```bash
