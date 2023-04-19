@@ -53,6 +53,10 @@ composer install
 ```bash
 ./vendor/bin/sail up
 ```
+7. Na raiz do projeto, execute o seguinte comando para criar a base de dados:
+```bash
+./vendor/bin/sail artisan migrate
+```
 ### Sistema de filas
 No projeto, foi implementado o sistema de filas do Laravel, que permite executar tarefas assíncronas em segundo plano. Isso é especialmente útil para processar tarefas que requerem muito tempo e recursos, como é o caso da manipulação de arquvios deste projeto.
 
