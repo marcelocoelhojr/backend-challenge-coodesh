@@ -69,6 +69,12 @@ Execute o seguinte comando para iniciar o cron schedule:
 ./vendor/bin/sail artisan schedule:work
 ```
 
+### Testes unitários
+Execute o seguinte comando para iniciar os testes:
+```bash
+./vendor/bin/sail artisan test
+```
+
 ### Endpoints
 Detalhes da API, se conexão leitura e escritura com a base de dados está OK, horário da última vez que o CRON foi executado, tempo online e uso de memória.
 ```bash
