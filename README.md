@@ -58,7 +58,7 @@ composer install
 ./vendor/bin/sail artisan migrate
 ```
 ### Sistema de filas
-No projeto, foi implementado o sistema de filas do Laravel, que permite executar tarefas assíncronas em segundo plano. Isso é especialmente útil para processar tarefas que requerem muito tempo e recursos, como é o caso da manipulação de arquvios deste projeto.
+No projeto, foi utilizado o sistema de filas do Laravel, que permite executar tarefas assíncronas em segundo plano. Isso é especialmente útil para processar tarefas que requerem muito tempo e recursos, como é o caso da manipulação de arquvios deste projeto.
 
 Execute o seguinte comando para iniciar o sistema de filas:
 ```bash
