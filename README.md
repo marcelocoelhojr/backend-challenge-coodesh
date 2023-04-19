@@ -40,7 +40,7 @@ Após a validação, os dados são salvos na base de dados. Esse processo envolv
 
 1. Clone o projeto em seu ambiente local:
 ```bash
-git@github.com:marcelocoelhojr/backend-challenge-coodesh.git
+git clone git@github.com:marcelocoelhojr/backend-challenge-coodesh.git
 ```
 2. Certifique-se de que você tem o Docker instalado em seu sistema.
 3. Na raiz do projeto, crie o arquivo .env a partir do arquivo .env.example:
