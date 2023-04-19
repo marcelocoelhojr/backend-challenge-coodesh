@@ -26,7 +26,14 @@ class ProductService
      */
     public function deleteProduct(int $code): int
     {
-        return Product::where('external_id', $code)->delete();
+        $product = Product::where('external_id', $code)->first();
+        if ($product == null) {
+            return 0;
+        }
+        $product->status = 'trash';
+        $product->save();
+
+        return $product->delete();
     }
 
     /**
