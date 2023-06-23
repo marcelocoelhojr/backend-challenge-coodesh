@@ -18,4 +18,14 @@ class CronLog extends Model
         'executed_at',
         'status_connection_database',
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function product()
+    {
+        return $this->hasOne(Product::class);
+    }
 }

@@ -66,4 +66,15 @@ class ProductService
 
         return $product;
     }
+
+    /**
+     * Get product by code with log
+     *
+     * @param integer $code
+     * @return Product
+     */
+    public function getProductLog(int $code): Product|null
+    {
+        return Product::with('cronLog')->where('external_id', $code)->first();
+    }
 }

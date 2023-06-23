@@ -42,7 +42,7 @@ class OpenFoodService extends OpenFoodApi implements ProductServiceContract
             $products = $filesService->readProductFile();
             $validateService = new OpenFoodValidation($this->fileName);
             $products->each(function ($product) use ($validateService) {
-                $validateService->validate(json_decode($product));
+                $validateService->validate(json_decode($product), $this->provider);
             });
         } catch (Exception $e) {
             throw new ProductException($e->getMessage());

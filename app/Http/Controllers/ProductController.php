@@ -80,4 +80,22 @@ class ProductController extends Controller
 
         return apiResponse(new ProductResource($product), 'produto atualizado com sucesso');
     }
+
+    /**
+     * Get product by code with log
+     *
+     * @param integer $code
+     * @param array $params
+     * @return Response|JsonResponse
+     */
+    public function getProductLog(int $code): Response|JsonResponse
+    {
+        $productService = new ProductService();
+        $product = $productService->getProductLog($code);
+        if ($product == null) {
+            return response()->noContent();
+        }
+
+        return apiResponse($product, 'produto atualizado com sucesso');
+    }
 }

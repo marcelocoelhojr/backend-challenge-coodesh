@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use App\Models\CronLog as ModelsCronLog;
+use Carbon\Carbon;
 
 class Product extends Model
 {
@@ -18,7 +21,8 @@ class Product extends Model
         'imported_t',
         'url',
         'product_file',
-        'payload'
+        'payload',
+        'cron_log_id'
     ];
 
     /**
@@ -58,5 +62,30 @@ class Product extends Model
             "main_category" =>  'nullable|string',
             "image_url" =>  'nullable|string'
         ];
+    }
+
+    public function cronLog()
+    {
+        return $this->belongsTo(CronLog::class);
+    }
+
+    public static function logs($model, $product, $provider, $time)
+    {
+        DB::transaction(function () use ($model, $provider, $time) {
+            $cronLog = ModelsCronLog::create([
+                'name' => $provider,
+                'time' => $time,
+                'memory' => memory_get_usage(),
+                'executed_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'status_connection_database' => DB::connection()->getPdo() ? 'SUCCESS' : 'FAILURE'
+            ]);
+            $product = $cronLog->products()->save($model);
+            $product->cronLogs()->attach([$product->id, $cronLog->id]);
+        });
+    }
+
+    public function cronLogs()
+    {
+        return $this->belongsToMany(CronLog::class, 'cron_log_product', 'product_id', 'cron_log_id');
     }
 }

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CronLogController;
 use App\Http\Controllers\ProductController;
+use App\Jobs\ProductJob;
+use App\Services\Product\ProductConfirmationSchedule;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//! Retorna o log mais o produto relacionado ao log.
+Route::get('/{id}', [CronLogController::class, 'getProductDetails'])->where('id', '[0-9]+');
+Route::get('/{id}/products', [CronLogController::class, 'listProductLog']);
+
 Route::get('/', [CronLogController::class, 'getApidetails']);
 Route::prefix('products')->group(function () {
     Route::put('/{code}', [ProductController::class, 'update']);
     Route::delete('/{code}', [ProductController::class, 'delete']);
     Route::get('/{code}', [ProductController::class, 'getProduct']);
+    //!Retorna o produto mais o log relacioando
+    Route::get('/log/{code}', [ProductController::class, 'getProductLog']);
     Route::get('/', [ProductController::class, 'getProductsList']);
 });

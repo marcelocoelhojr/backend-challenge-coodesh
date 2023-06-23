@@ -7,12 +7,16 @@ use stdClass;
 
 abstract class ProductValidation
 {
+
+
     protected stdClass $product;
     protected string $fileName;
+    private string $startTime;
 
     public function __construct(string $fileName)
     {
         $this->fileName = $fileName;
+        $this->startTime =  microtime(true);
     }
 
     /**
@@ -21,7 +25,7 @@ abstract class ProductValidation
      * @param stdClass $product
      * @return void
      */
-    public function validate(stdClass $product): void
+    public function validate(stdClass $product, string $provider): void
     {
         $this->product = $product;
         $code = $this->findProduct();
@@ -29,7 +33,7 @@ abstract class ProductValidation
             return;
         }
         $model = $this->setProductApiData($product);
-        $model->save();
+        Product::logs($model, $product, $provider, $this->startTime);
     }
 
     /**
